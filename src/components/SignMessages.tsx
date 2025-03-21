@@ -91,7 +91,7 @@ export default function SignMessages({
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Sign Proof of Funds</h2>
       
       <div className="mb-6">

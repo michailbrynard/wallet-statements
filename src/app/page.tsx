@@ -6,6 +6,7 @@ import ConnectWallet from '@/components/ConnectWallet';
 import AddressSelection from '@/components/AddressSelection';
 import SignMessages from '@/components/SignMessages';
 import Statement from '@/components/Statement';
+import ThemeToggle from '@/components/ThemeToggle';
 import useWalletStatement from '@/hooks/useWalletStatement';
 import Link from 'next/link';
 
@@ -28,23 +29,27 @@ export default function Home() {
   } = useWalletStatement();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <h1 className="text-xl font-bold text-gray-900">Trezor Hardware Wallet Statement</h1>
           
-          {step !== 'info' && (
-            <button
-              onClick={reset}
-              className="text-sm text-gray-500 hover:text-gray-700"
-            >
-              Start Over
-            </button>
-          )}
+          <div className="flex items-center space-x-4">
+            {step !== 'info' && (
+              <button
+                onClick={reset}
+                className="text-sm text-gray-500 hover:text-gray-700"
+              >
+                Start Over
+              </button>
+            )}
+            
+            <ThemeToggle />
+          </div>
         </div>
       </header>
       
-      <main className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <main className="w-full max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-grow">
         {/* Step 1: Enter wallet info */}
         {step === 'info' && (
           <WalletInfoForm 
@@ -93,7 +98,7 @@ export default function Home() {
         )}
       </main>
       
-      <footer className="bg-white border-t border-gray-200 mt-12">
+      <footer className="bg-white border-t border-gray-200 mt-auto">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center">
             <p className="text-center text-sm text-gray-500">

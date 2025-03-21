@@ -44,7 +44,7 @@ export default function WalletInfoForm({ onSubmit, isLoading = false }: WalletIn
   };
   
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl mx-auto">
       <h2 className="text-xl font-semibold mb-4 text-gray-800">Wallet Statement Information</h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">

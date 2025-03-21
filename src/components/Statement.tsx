@@ -34,7 +34,7 @@ export default function Statement({ proofOfFunds, onBack }: StatementProps) {
   };
 
   return (
-    <section className="p-6 bg-white rounded-lg shadow-lg print:shadow-none">
+    <section className="p-6 bg-white rounded-lg shadow-lg print:shadow-none w-full mx-auto">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-2xl font-bold mb-4">Bitcoin Wallet Statement</h2>

@@ -12,10 +12,112 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html, body {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Force dark mode directly on html and body elements */
+html.dark {
+  background-color: #0a0a0a !important;
+}
+
+html.dark body {
+  background-color: #0a0a0a !important;
+  color: #ededed !important;
+}
+
+/* Direct selectors for major layout components */
+html.dark .min-h-screen {
+  background-color: #0a0a0a !important;
+}
+
+html.dark header,
+html.dark .bg-white.shadow-sm {
+  background-color: #1a1a1a !important;
+  border-color: #333333 !important;
+}
+
+html.dark footer,
+html.dark .bg-white.border-t {
+  background-color: #1a1a1a !important;
+  border-color: #333333 !important;
+}
+
+html.dark main {
+  color: #ededed !important;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+/* Dark mode component styles */
+.dark {
+  /* Override background colors for dark mode */
+  .bg-white {
+    background-color: #1a1a1a !important;
+  }
+  
+  .bg-gray-50 {
+    background-color: #222222 !important;
+  }
+  
+  .bg-gray-100 {
+    background-color: #272727 !important;
+  }
+  
+  .bg-gray-200 {
+    background-color: #333333 !important;
+  }
+  
+  /* Fix table styles */
+  tbody.bg-white {
+    background-color: #1a1a1a !important;
+  }
+  
+  thead.bg-gray-50 {
+    background-color: #222222 !important;
+  }
+  
+  .divide-gray-200 > * + * {
+    border-color: #333333 !important;
+  }
+  
+  /* Border colors */
+  .border-gray-200, .border-gray-300 {
+    border-color: #333333 !important;
+  }
+  
+  /* Improve text contrast in dark mode */
+  .text-gray-500 {
+    color: #b3b3b3 !important; /* Lighter gray for better visibility */
+  }
+  
+  .text-gray-600, .text-gray-700 {
+    color: #d1d1d1 !important; /* Even lighter gray for better visibility */
+  }
+  
+  .text-gray-800, .text-gray-900 {
+    color: #f5f5f5 !important; /* Almost white for headers */
+  }
+  
+  /* Fix input placeholder color */
+  ::placeholder {
+    color: #b3b3b3 !important;
+    opacity: 1;
+  }
+  
+  /* Fix hover states */
+  .hover\:bg-gray-50:hover {
+    background-color: #2a2a2a !important;
+  }
+  
+  .hover\:bg-gray-300:hover {
+    background-color: #444444 !important;
   }
 }
 
@@ -23,4 +125,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }

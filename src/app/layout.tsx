@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ClientLoadingWrapper from "@/components/ClientLoadingWrapper";
+import ThemeInitializer from "@/components/ThemeInitializer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,9 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body className={`${inter.variable} font-sans h-full antialiased`}>
+      <head>
+        {/* No more inline script here - prevents hydration errors */}
+      </head>
+      <body className={`${inter.variable} font-sans h-full antialiased flex flex-col`}>
+        <ThemeInitializer />
         <ClientLoadingWrapper />
-        {children}
+        <div className="flex flex-col min-h-screen flex-grow">
+          {children}
+        </div>
       </body>
     </html>
   );
