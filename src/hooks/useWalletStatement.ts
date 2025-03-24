@@ -3,7 +3,7 @@ import { WalletInfo, Address, SignedMessage, ProofOfFunds } from '@/types';
 import { initTrezor, getAddresses } from '@/utils/trezor';
 import { updateWalletInfoWithExchangeRate } from '@/utils/currency';
 
-type Step = 'info' | 'connect' | 'addresses' | 'sign' | 'statement';
+export type Step = 'info' | 'connect' | 'addresses' | 'sign' | 'statement';
 
 export default function useWalletStatement() {
   const [step, setStep] = useState<Step>('info');

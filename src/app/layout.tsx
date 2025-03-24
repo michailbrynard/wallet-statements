@@ -11,9 +11,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Trezor Hardware Wallet Statement Generator",
-  description: "Generate professional statements for your Trezor hardware wallet with proof of funds verification",
-  keywords: ["trezor", "bitcoin", "wallet", "statement", "proof of funds", "cryptocurrency"],
+  title: "WalletStatements.com - Professional Bitcoin Wallet Statements & Signature Verification",
+  description: "Generate professional Bitcoin wallet statements and verify ownership with cryptographic signatures. Perfect for proof of funds, mortgage applications, and financial verification.",
+  keywords: ["bitcoin wallet statement", "proof of funds", "bitcoin signature verification", "verify bitcoin address", "bitcoin proof of ownership", "cryptographic signature", "bitcoin wallet verification", "trezor statement", "hardware wallet statement", "mortgage proof of funds"],
+  openGraph: {
+    title: "WalletStatements.com - Professional Bitcoin Wallet Statements & Signature Verification",
+    description: "Generate professional Bitcoin wallet statements and verify ownership with cryptographic signatures. Perfect for proof of funds, mortgage applications, and financial verification.",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WalletStatements.com - Professional Bitcoin Wallet Statements & Signature Verification",
+    description: "Generate professional Bitcoin wallet statements and verify ownership with cryptographic signatures. Perfect for proof of funds, mortgage applications, and financial verification.",
+  },
 };
 
 export default function RootLayout({
@@ -22,9 +33,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full" suppressHydrationWarning>
       <head>
-        {/* No more inline script here - prevents hydration errors */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.variable} font-sans h-full antialiased flex flex-col`}>
         <ThemeInitializer />
