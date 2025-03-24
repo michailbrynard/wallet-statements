@@ -105,9 +105,14 @@ export default function Home() {
               © {new Date().getFullYear()} Trezor Hardware Wallet Statement Generator. 
               This is a demonstration app for educational purposes.
             </p>
-            <Link href="/debug" className="mt-2 text-xs text-blue-500 hover:underline">
-              Debug Tools
-            </Link>
+            <div className="mt-2 space-x-4">
+              <Link href="/debug" className="text-xs text-blue-500 hover:underline">
+                Debug Tools
+              </Link>
+              <Link href="/verify" className="text-xs text-blue-500 hover:underline">
+                Signature Verification
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
