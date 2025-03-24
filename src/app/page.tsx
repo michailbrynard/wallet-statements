@@ -27,6 +27,7 @@ export default function Home() {
     saveSignedMessages,
     getProofOfFunds,
     reset,
+    connectionStep,
   } = useWalletStatement();
 
   if (step === 'info') {
@@ -66,6 +67,8 @@ export default function Home() {
                   </button>
                   <Link
                     href="/example-statement.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="rounded-md bg-gray-800 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 cursor-pointer"
                   >
                     Preview Statement
@@ -94,7 +97,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">Secure & Private</h3>
-                <p className="text-gray-600">Your private keys never leave your hardware wallet. We only read public information.</p>
+                <p className="text-gray-600">Your private keys never leave your hardware wallet. All operations require explicit device confirmation and no data is sent to servers.</p>
               </div>
               <div className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
@@ -239,7 +242,8 @@ export default function Home() {
           <ConnectWallet 
             onConnect={connectWallet} 
             isLoading={isLoading} 
-            error={error} 
+            error={error}
+            currentStep={connectionStep}
           />
         )}
         

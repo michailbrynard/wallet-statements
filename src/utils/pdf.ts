@@ -22,7 +22,7 @@ export const generatePDF = async (proofOfFunds: ProofOfFunds): Promise<Uint8Arra
   // Professional color scheme
   const primaryColor = rgb(0.05, 0.2, 0.4); // Professional dark blue
   const secondaryColor = rgb(0.7, 0.7, 0.7); // Light gray for accents
-  const accentColor = rgb(0.0, 0.4, 0.2); // Dark green for fiat values
+  const accentColor = rgb(0.3, 0.3, 0.3); // Neutral gray for fiat values
   const bitcoinColor = rgb(0, 0, 0); // Changed from orange to black
   const backgroundHighlight = rgb(0.97, 0.97, 1); // Very light blue for highlights
   
@@ -150,9 +150,12 @@ export const generatePDF = async (proofOfFunds: ProofOfFunds): Promise<Uint8Arra
     borderWidth: 1,
   });
   
+  // Center text vertically in the box (yPos - 5 is the top of the box, height is 30)
+  const textY = yPos - 5 + (30 / 2) - 5; // Center of box minus half the text height
+  
   currentPage.drawText('Total Balance:', {
     x: leftCol,
-    y: yPos,
+    y: textY,
     size: 14,
     font: helveticaBold,
     color: primaryColor,
@@ -162,7 +165,7 @@ export const generatePDF = async (proofOfFunds: ProofOfFunds): Promise<Uint8Arra
   const formattedBitcoin = walletInfo.totalBalance.toFixed(8);
   currentPage.drawText(`${formattedBitcoin} BTC`, {
     x: rightCol,
-    y: yPos,
+    y: textY,
     size: 14,
     font: helveticaBold,
     color: bitcoinColor,
@@ -179,7 +182,7 @@ export const generatePDF = async (proofOfFunds: ProofOfFunds): Promise<Uint8Arra
     // Add equals sign in neutral color
     currentPage.drawText('=', {
       x: rightCol + bitcoinWidth + 15,
-      y: yPos,
+      y: textY,
       size: 14,
       font: helveticaFont,
       color: rgb(0.3, 0.3, 0.3),
@@ -188,7 +191,7 @@ export const generatePDF = async (proofOfFunds: ProofOfFunds): Promise<Uint8Arra
     // Draw fiat value in appropriate color
     currentPage.drawText(formattedFiat, {
       x: rightCol + bitcoinWidth + 35,
-      y: yPos,
+      y: textY,
       size: 14,
       font: helveticaBold,
       color: accentColor,
@@ -511,6 +514,17 @@ export const generatePDF = async (proofOfFunds: ProofOfFunds): Promise<Uint8Arra
       color: rgb(0, 0, 0),
     });
     
+    messageYPos -= 20;
+    // Add verification link
+    const verifyText = 'Verify at https://walletstatements.com/verify';
+    messagesPage.drawText(verifyText, {
+      x: 50,
+      y: messageYPos,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0.0, 0.4, 0.8),
+    });
+    
     messageYPos -= 40;
     
     for (let i = 0; i < signedMessages.length; i++) {
@@ -724,19 +738,30 @@ function drawFooter(
 ) {
   // Draw footer line
   page.drawLine({
-    start: { x: 50, y: height + 20 },
-    end: { x: width - 50, y: height + 20 },
-    thickness: 0.5,
+    start: { x: 50, y: 50 },
+    end: { x: width - 50, y: 50 },
+    thickness: 1,
     color: rgb(0.7, 0.7, 0.7),
   });
-  
-  // Add page number and date
-  page.drawText(`Generated on ${reportDate} | Bitcoin Wallet Statement`, {
-    x: width / 2 - 120,
-    y: height + 5,
-    size: 8,
-    font: font,
-    color: rgb(0.5, 0.5, 0.5),
+
+  // Add report date
+  page.drawText(`Report generated on ${reportDate}`, {
+    x: 50,
+    y: 30,
+    size: 10,
+    font,
+    color: rgb(0.3, 0.3, 0.3),
+  });
+
+  // Add website link
+  const websiteText = 'https://walletstatements.com';
+  const websiteWidth = font.widthOfTextAtSize(websiteText, 10);
+  page.drawText(websiteText, {
+    x: width - 50 - websiteWidth,
+    y: 30,
+    size: 10,
+    font,
+    color: rgb(0.0, 0.4, 0.8),
   });
 }
 

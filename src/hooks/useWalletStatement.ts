@@ -7,6 +7,7 @@ export type Step = 'info' | 'connect' | 'addresses' | 'sign' | 'statement';
 
 export default function useWalletStatement() {
   const [step, setStep] = useState<Step>('info');
+  const [connectionStep, setConnectionStep] = useState(1);
   const [walletInfo, setWalletInfo] = useState<Partial<WalletInfo>>({
     reportDate: new Date().toISOString().split('T')[0],
     currency: 'BTC',
@@ -54,12 +55,14 @@ export default function useWalletStatement() {
     setIsLoading(true);
     setIsLoadingBalances(true);
     setError(null);
+    setConnectionStep(1);
     
     try {
       console.log('Attempting to connect to Trezor wallet...');
       // Change from fixed count of 10 to allow the discovery mechanism to work
       // We'll pass 5 as the minimum number of addresses we want, but the function
       // will continue scanning until it finds a gap of 20 empty addresses
+      setConnectionStep(2);
       const walletAddresses = await getAddresses(0, 5);
       console.log('Successfully retrieved addresses:', walletAddresses);
       
@@ -73,6 +76,7 @@ export default function useWalletStatement() {
         console.log(`Found ${addressesWithBalance.length} addresses with balances out of ${walletAddresses.length} total`);
       }
       
+      setConnectionStep(3);
       setAddresses(walletAddresses);
       setStep('addresses');
     } catch (err) {
@@ -145,6 +149,7 @@ export default function useWalletStatement() {
   
   return {
     step,
+    connectionStep,
     walletInfo,
     addresses,
     selectedAddresses,
