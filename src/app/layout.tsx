@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "WalletStatements.com - Professional Bitcoin Wallet Statements & Signature Verification",
-  description: "Generate professional Bitcoin wallet statements and verify ownership with cryptographic signatures. Perfect for proof of funds, mortgage applications, and financial verification.",
+  title: "WalletStatements.com - Professional Bitcoin Wallet Statements",
+  description: "Generate secure, verifiable proof of funds for your Bitcoin wallet. Perfect for mortgage applications, financial verification, and business transactions.",
   keywords: ["bitcoin wallet statement", "proof of funds", "bitcoin signature verification", "verify bitcoin address", "bitcoin proof of ownership", "cryptographic signature", "bitcoin wallet verification", "trezor statement", "hardware wallet statement", "mortgage proof of funds"],
   openGraph: {
     title: "WalletStatements.com - Professional Bitcoin Wallet Statements & Signature Verification",
@@ -24,6 +24,20 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "WalletStatements.com - Professional Bitcoin Wallet Statements & Signature Verification",
     description: "Generate professional Bitcoin wallet statements and verify ownership with cryptographic signatures. Perfect for proof of funds, mortgage applications, and financial verification.",
+  },
+  icons: {
+    icon: [
+      {
+        url: '/icon',
+        type: 'image/png',
+      },
+    ],
+    apple: [
+      {
+        url: '/apple-icon',
+        type: 'image/png',
+      },
+    ],
   },
 };
 
