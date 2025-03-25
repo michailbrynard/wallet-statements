@@ -19,10 +19,10 @@ export default function Error({
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-red-600 mb-4">Something went wrong!</h1>
+          <h1 className="text-3xl font-bold text-red-600 mb-4">Something&apos;s gone wrong!</h1>
           <div className="mb-6">
             <p className="text-gray-700 mb-2">
-              We're sorry, but we encountered an error processing your request.
+              We&apos;re sorry, but we encountered an error processing your request.
             </p>
             <p className="text-gray-500 text-sm mb-4">
               Error details: {error.message || "Unknown error"}

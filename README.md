@@ -65,6 +65,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - No data storage or transmission of sensitive information
 - Open-source code for security auditing
 
+## Support
+
+If you find this project useful, consider supporting its development:
+
+Bitcoin: `bc1qdlugrqq6z6s624lqws9dc5nkz2x74e4f3znmsl`
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.

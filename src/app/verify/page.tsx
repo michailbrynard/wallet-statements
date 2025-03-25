@@ -15,9 +15,11 @@ export default function VerifyPage() {
     try {
       // TODO: Implement actual signature verification
       setVerificationResult(true);
-    } catch (err) {
-      setError('Failed to verify signature. Please check your inputs and try again.');
+      setError(null); // Clear any previous errors
+    } catch (error) {
+      console.error('Error verifying signature:', error);
       setVerificationResult(false);
+      setError('Failed to verify signature. Please check your inputs and try again.');
     }
   };
 

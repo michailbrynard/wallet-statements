@@ -1,15 +1,31 @@
 "use client";
 
-import { useEffect } from 'react';
 import WalletInfoForm from '@/components/WalletInfoForm';
 import ConnectWallet from '@/components/ConnectWallet';
 import AddressSelection from '@/components/AddressSelection';
 import SignMessages from '@/components/SignMessages';
 import Statement from '@/components/Statement';
 import ThemeToggle from '@/components/ThemeToggle';
-import useWalletStatement, { Step } from '@/hooks/useWalletStatement';
+import useWalletStatement from '@/hooks/useWalletStatement';
 import Link from 'next/link';
-import Image from 'next/image';
+
+const GitHubLink = () => (
+  <Link
+    href="https://github.com/michailbrynard/wallet-statements"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-gray-600 hover:text-gray-900 transition-colors"
+    aria-label="View source on GitHub"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      className="w-6 h-6"
+      fill="currentColor"
+    >
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  </Link>
+);
 
 export default function Home() {
   const {
@@ -39,6 +55,7 @@ export default function Home() {
               WalletStatements.com
             </Link>
             <div className="flex items-center space-x-4">
+              <GitHubLink />
               <ThemeToggle />
             </div>
           </div>
@@ -165,15 +182,15 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">How does the security work?</h3>
-                  <p className="text-gray-600">Your hardware wallet's security model ensures complete protection. Every operation requires explicit confirmation on your device's screen, and private keys never leave your wallet. We only read public information that you can verify directly on your hardware wallet's display.</p>
+                  <p className="text-gray-600">Your hardware wallet&apos;s security model ensures complete protection. Every operation requires explicit confirmation on your device&apos;s screen, and private keys never leave your wallet. We only read public information that you can verify directly on your hardware wallet&apos;s display.</p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">What information is included?</h3>
-                  <p className="text-gray-600">Each statement includes your wallet addresses, current balances, and cryptographic signatures proving ownership. You'll need to provide your name and wallet label for professional presentation.</p>
+                  <p className="text-gray-600">Each statement includes your wallet addresses, current balances, and cryptographic signatures proving ownership. You&apos;ll need to provide your name and wallet label for professional presentation.</p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">How do I verify a statement?</h3>
-                  <p className="text-gray-600">Use our <Link href="/verify" className="text-blue-500 hover:underline cursor-pointer">verification tool</Link> to independently verify any statement's authenticity. Simply enter the statement details and cryptographic signatures to confirm ownership.</p>
+                  <p className="text-gray-600">Use our <Link href="/verify" className="text-blue-500 hover:underline cursor-pointer">verification tool</Link> to independently verify any statement&apos;s authenticity. Simply enter the statement details and cryptographic signatures to confirm ownership.</p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">What wallets are supported?</h3>
@@ -181,7 +198,7 @@ export default function Home() {
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Is my data private?</h3>
-                  <p className="text-gray-600">Yes. This is a front-end only application - all operations happen locally in your browser. No data is ever sent to servers or stored anywhere. You can verify this in our open source code or using your browser's network inspector.</p>
+                  <p className="text-gray-600">Yes. This is a front-end only application - all operations happen locally in your browser. No data is ever sent to servers or stored anywhere. You can verify this in our open source code or using your browser&apos;s network inspector.</p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">What can I use this for?</h3>
@@ -209,6 +226,12 @@ export default function Home() {
                   Terms of Service
                 </Link>
               </div>
+              <div className="mt-4 flex items-center justify-center space-x-2">
+                <svg className="w-5 h-5 text-orange-500" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.548v-.002zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.33-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165c-.285-.067-.565-.132-.84-.2l-1.815-.45-.35 1.407s.975.225.955.236c.535.136.63.486.615.766l-1.477 5.92c-.075.166-.24.406-.614.314.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.236-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.51 2.154 1.32.33.545-2.19c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93h.01zm-3.01 4.22c-.404 1.64-3.157.75-4.05.53l.72-2.9c.896.23 3.757.67 3.33 2.37zm.41-4.24c-.37 1.49-2.662.735-3.405.55l.654-2.64c.744.18 3.137.524 2.75 2.084v.006z" />
+                </svg>
+                <span className="text-sm text-gray-500">Support us: <span className="font-mono">bc1qdlugrqq6z6s624lqws9dc5nkz2x74e4f3znmsl</span></span>
+              </div>
             </div>
           </div>
         </footer>
@@ -232,6 +255,7 @@ export default function Home() {
                 Start Over
               </button>
             ) : null}
+            <GitHubLink />
             <ThemeToggle />
           </div>
         </div>

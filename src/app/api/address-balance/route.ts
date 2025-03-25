@@ -44,15 +44,17 @@ export async function GET(request: Request) {
     try {
       const result = await fetchBalanceFromBlockstream(address);
       return NextResponse.json(result);
-    } catch (error) {
+    } catch (mainnetError) {
       // If mainnet fails, try testnet
-      console.log(`Mainnet lookup failed for ${address}, trying testnet...`);
+      console.log(`Mainnet lookup failed for ${address}:`, mainnetError);
+      console.log('Trying testnet...');
       try {
         const testnetResult = await fetchBalanceFromBlockstream(address, true);
         return NextResponse.json(testnetResult);
       } catch (testnetError) {
-        // If both fail, return an error
-        throw error;
+        // Handle error
+        console.error('Testnet lookup failed:', testnetError);
+        return NextResponse.json({ error: 'Failed to fetch balance' }, { status: 500 });
       }
     }
   } catch (error) {

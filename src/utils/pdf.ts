@@ -1,5 +1,5 @@
-import { PDFDocument, rgb, StandardFonts, PDFPage } from 'pdf-lib';
-import { WalletInfo, ProofOfFunds, SignedMessage } from '@/types';
+import { PDFDocument, rgb, StandardFonts, PDFPage, PDFFont, RGB } from 'pdf-lib';
+import { ProofOfFunds } from '@/types';
 import { formatCurrencyAmount } from '@/utils/currency';
 
 export const generatePDF = async (proofOfFunds: ProofOfFunds): Promise<Uint8Array> => {
@@ -15,7 +15,6 @@ export const generatePDF = async (proofOfFunds: ProofOfFunds): Promise<Uint8Arra
   // Get the standard font
   const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const timesRoman = await pdfDoc.embedFont(StandardFonts.TimesRoman);
   const timesRomanBold = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
   const timesItalic = await pdfDoc.embedFont(StandardFonts.TimesRomanItalic);
   
@@ -697,9 +696,9 @@ function drawHeader(
   width: number,
   height: number,
   title: string,
-  titleFont: any,
-  secondaryColor: any,
-  primaryColor: any
+  titleFont: PDFFont,
+  secondaryColor: RGB,
+  primaryColor: RGB
 ) {
   // Draw header background
   page.drawRectangle({
@@ -734,7 +733,7 @@ function drawFooter(
   width: number,
   height: number,
   reportDate: string,
-  font: any
+  font: PDFFont
 ) {
   // Draw footer line
   page.drawLine({
@@ -766,7 +765,7 @@ function drawFooter(
 }
 
 // Helper function for word wrapping
-function wordWrap(text: string, font: any, fontSize: number, maxWidth: number): string[] {
+function wordWrap(text: string, font: PDFFont, fontSize: number, maxWidth: number): string[] {
   const words = text.split(' ');
   const lines = [];
   let currentLine = '';

@@ -1,17 +1,15 @@
 import TrezorConnect from '@trezor/connect-web';
 import { Address, SignedMessage } from '@/types';
-import * as bitcoin from 'bitcoinjs-lib';
-import { payments, networks } from 'bitcoinjs-lib';
 
 // Define types for Trezor API responses
-interface TrezorAddress {
+export interface TrezorAddress {
   path: string;
   address: string;
   balance?: number;
   transfers?: number;
 }
 
-interface TrezorTransaction {
+export interface TrezorTransaction {
   timestamp: number;
   inputs: {
     addresses?: string[];
@@ -19,18 +17,6 @@ interface TrezorTransaction {
   outputs: {
     addresses?: string[];
   }[];
-}
-
-interface TrezorAccountInfo {
-  addresses?: TrezorAddress[];
-  used?: TrezorAddress[];
-  unused?: TrezorAddress[];
-  change?: TrezorAddress[];
-  history?: {
-    transactions?: TrezorTransaction[];
-  };
-  path?: string;
-  descriptor?: string;
 }
 
 // Create a simple rate limiter
@@ -93,25 +79,6 @@ export const initTrezor = () => {
   }
 };
 
-// Helper function to generate mock addresses
-const generateMockAddresses = (startIndex: number, count: number): Address[] => {
-  console.warn('Using mock addresses as fallback');
-  const addresses: Address[] = [];
-  
-  for (let i = startIndex; i < startIndex + count; i++) {
-    addresses.push({
-      path: `m/84'/0'/0'/0/${i}`,
-      address: `bc1q${Math.random().toString(36).substring(2, 15)}`,
-      balance: Math.random() * 2, // Mock balance in BTC
-      transactions: Math.floor(Math.random() * 50),
-      lastActivity: new Date(Date.now() - Math.random() * 10000000000).toISOString().split('T')[0],
-    });
-  }
-  
-  console.log("Generated mock addresses:", addresses);
-  return addresses;
-};
-
 // Fetch real-time balance from a blockchain API via our server API route
 // Adds rate limiting to prevent 500 errors
 const fetchAddressBalance = async (address: string): Promise<number> => {
@@ -138,46 +105,6 @@ const fetchAddressBalance = async (address: string): Promise<number> => {
     });
   });
 };
-
-// Function to safely get an address from the device with retries on error
-async function safeGetAddress(path: string, retries = 3): Promise<any> {
-  let attempt = 0;
-  let lastError = null;
-  
-  while (attempt < retries) {
-    try {
-      // Add a small delay between device calls
-      if (attempt > 0) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      }
-      
-      const result = await TrezorConnect.getAddress({
-        path,
-        coin: 'btc',
-        showOnTrezor: false,
-      });
-      
-      if (result.success) {
-        return result;
-      } else if (result.payload.error && result.payload.error.includes('device call in progress')) {
-        // If device is busy, wait a bit longer before retry
-        console.warn(`Device busy, waiting longer before retry for ${path}`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } else {
-        console.warn(`Failed to get address for ${path}:`, result.payload.error);
-        return null;
-      }
-    } catch (error) {
-      console.error(`Error in attempt ${attempt + 1} for ${path}:`, error);
-      lastError = error;
-    }
-    
-    attempt++;
-  }
-  
-  console.error(`Failed to get address for ${path} after ${retries} attempts:`, lastError);
-  return null;
-}
 
 // Get Bitcoin addresses from Trezor
 export const getAddresses = async (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProofOfFunds, Address, SignedMessage } from '@/types';
+import { ProofOfFunds } from '@/types';
 import { formatCurrencyAmount } from '@/utils/currency';
 import { generatePDF } from '@/utils/pdf';
 
@@ -72,6 +72,12 @@ export default function Statement({ proofOfFunds, onBack }: StatementProps) {
         </div>
         
         <div className="flex flex-col items-end space-y-4">
+          <button
+            onClick={onBack}
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+          >
+            Back
+          </button>
           <button
             onClick={handleDownloadPDF}
             disabled={isGenerating}

@@ -2,9 +2,17 @@
 
 import { useState } from 'react';
 
+interface BalanceResult {
+  address: string;
+  balanceSats: number;
+  balanceBTC: number;
+  networkType: 'mainnet' | 'testnet';
+  error?: string;
+}
+
 export default function BalanceChecker() {
   const [address, setAddress] = useState('');
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<BalanceResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

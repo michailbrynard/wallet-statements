@@ -153,7 +153,7 @@ export default function SignatureVerificationForm() {
             <li>Enter the Bitcoin address that signed the message</li>
             <li>Enter the message that was signed</li>
             <li>Paste the signature in Base64 format (spaces and line breaks will be automatically removed)</li>
-            <li>Click "Verify Signature" to check if the signature is valid</li>
+            <li>Click &ldquo;Verify Signature&rdquo; to check if the signature is valid</li>
           </ol>
         </div>
 
